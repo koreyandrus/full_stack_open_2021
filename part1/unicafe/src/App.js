@@ -12,15 +12,22 @@ const Button = (props) => {
 const Statistics = ({ good, neutral, bad}) => {
   const all = good + neutral + bad
   const avg = all / 3;
-  
+
+  if(good || bad || neutral) {
+    return (
+      <div>
+        good {good}<br/>
+        neutral {neutral}<br/>
+        bad {bad}<br/>
+        all {all}<br/>
+        average {avg}<br/>
+        positive {(good / (good + neutral + bad)) * 100}<br/>
+      </div>
+    )
+  }
   return (
     <div>
-      good {good}<br/>
-      neutral {neutral}<br/>
-      bad {bad}<br/>
-      all {all}<br/>
-      average {avg}<br/>
-      positive {(good / (good + neutral + bad)) * 100}<br/>
+      No feedback given
     </div>
   )
 }
