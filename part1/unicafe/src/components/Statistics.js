@@ -7,14 +7,16 @@ const Statistics = ({ good, neutral, bad}) => {
   
     if(good || bad || neutral) {
       return (
-        <div>
-            <StatisticLine text='good' value={good} />
-            <StatisticLine text='neutral' value={neutral} />
-            <StatisticLine text='bad' value={bad} />
-            <StatisticLine text='all' value={all} />
-            <StatisticLine text='average' value={avg} />
-            <StatisticLine text='positive' value={(good / (good + neutral + bad)) * 100} />
-        </div>
+        <table>
+            <tbody>
+                <StatisticLine text='good' value={good} />
+                <StatisticLine text='neutral' value={neutral} />
+                <StatisticLine text='bad' value={bad} />
+                <StatisticLine text='all' value={all} />
+                <StatisticLine text='average' value={avg} />
+                <StatisticLine text='positive' value={(good / (good + neutral + bad)) * 100} />
+            </tbody>
+        </table>
       )
     }
     return (
