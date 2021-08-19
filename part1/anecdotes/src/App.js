@@ -1,5 +1,12 @@
 import React, { useState } from "react";
 
+const Statistics = ({ votes }) => {
+  return (
+    <p>has {votes} votes</p>
+  )
+}
+
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often',
@@ -13,11 +20,28 @@ const App = () => {
 
 
   const [selected, setSelected] = useState(0);
+  const [votes, setVotes] = useState(Array.apply(null, new Array(anecdotes.length)).map(Number.prototype.valueOf,0));
+  // let numVotes = Array.apply(null, new Array(anecdotes.length)).map(Number.prototype.valueOf,0);;
+  
+  const handleClick = () => {
+    return (
+      setSelected(Math.floor(Math.random() * anecdotes.length))
+    )
+  };
+
+  const handleVote = () => {
+    const copy = { ...votes }
+
+    copy[selected] += 1;
+    setVotes(copy);
+  }
 
   return (
     <>
       <h5>{anecdotes[selected]}</h5>
-      <button onClick={() => {setSelected(Math.floor(Math.random() * anecdotes.length))}}>next anecdote</button>
+      <Statistics votes={votes[selected]} />
+      <button onClick={handleVote}>vote</button>
+      <button onClick={handleClick}>next anecdote</button>
     </>
   );
 }
