@@ -6,6 +6,17 @@ const Statistics = ({ votes }) => {
   )
 }
 
+const BestAnecdote = ({ votes, index, anecdotes }) => {
+
+  return (
+    <>
+      <h1>Anecdote with most votes</h1>
+      {anecdotes[index]}
+      <Statistics votes={votes} />
+    </>
+  )
+}
+
 
 const App = () => {
   const anecdotes = [
@@ -21,7 +32,9 @@ const App = () => {
 
   const [selected, setSelected] = useState(0);
   const [votes, setVotes] = useState(Array.apply(null, new Array(anecdotes.length)).map(Number.prototype.valueOf,0));
-  // let numVotes = Array.apply(null, new Array(anecdotes.length)).map(Number.prototype.valueOf,0);;
+  const [top, setTop] = useState(0);
+  const [topIndex, setTopIndex] = useState(0);
+  // let numVotes = Array.apply(null, new Array(anecdotes.length)).map(Number.prototype.valueOf,0);
   
   const handleClick = () => {
     return (
@@ -30,18 +43,25 @@ const App = () => {
   };
 
   const handleVote = () => {
-    const copy = { ...votes }
+    const copy = [ ...votes ]
 
     copy[selected] += 1;
     setVotes(copy);
+
+    const topNum = [...copy];
+    setTopIndex(topNum.indexOf(Math.max(...topNum)));
+
+    setTop(Math.max(...topNum));
   }
 
   return (
     <>
+      <h1>Anecdote of the day</h1>
       <h5>{anecdotes[selected]}</h5>
       <Statistics votes={votes[selected]} />
       <button onClick={handleVote}>vote</button>
       <button onClick={handleClick}>next anecdote</button>
+      <BestAnecdote votes={top} index={topIndex} anecdotes={anecdotes} />
     </>
   );
 }
