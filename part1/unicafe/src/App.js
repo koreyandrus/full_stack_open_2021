@@ -1,37 +1,6 @@
 import React, { useState } from 'react';
-
-const Button = (props) => {
-  const { handleClick, text } = props
-  return (
-    <button onClick={handleClick}>
-      {text}
-    </button>
-  )
-}
-
-const Statistics = ({ good, neutral, bad}) => {
-  const all = good + neutral + bad
-  const avg = all / 3;
-
-  if(good || bad || neutral) {
-    return (
-      <div>
-        good {good}<br/>
-        neutral {neutral}<br/>
-        bad {bad}<br/>
-        all {all}<br/>
-        average {avg}<br/>
-        positive {(good / (good + neutral + bad)) * 100}<br/>
-      </div>
-    )
-  }
-  return (
-    <div>
-      No feedback given
-    </div>
-  )
-}
-
+import { Button } from './components/Button';
+import Statistics from './components/Statistics';
 
 
 const App = () => {
